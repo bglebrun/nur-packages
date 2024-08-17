@@ -14,12 +14,6 @@
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
     in
     {
-      overlay = final: prev: {
-        nur = import ./default.nix {
-          nurpkgs = prev;
-          pkgs = prev;
-        };
-      };
       legacyPackages = forAllSystems (system: import ./default.nix {
         pkgs = import nixpkgs { inherit system; };
       });
